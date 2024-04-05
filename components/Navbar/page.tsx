@@ -7,6 +7,7 @@ import { MagnifyingGlass, ShoppingCartSimple, User } from '@phosphor-icons/react
 import { Dropdown, DropdownTrigger, DropdownMenu, DropdownItem, Button } from "@nextui-org/react";
 import Cookies from 'js-cookie';
 import logo from '@/public/assets/logo.png'
+import NextNProgress from 'nextjs-progressbar';
 
 const Navbar = () => {
   const router = useRouter()
@@ -16,9 +17,22 @@ const Navbar = () => {
   const handleClickShop = () => {
     router.push('/home/cars')
   }
-  const handleClickCart = () => {
-    router.push('/home/cart')
+  const handleClickOrder = () => {
+    router.push('/home/cars/order')
   }
+
+  const handleClickAdminUser = () => {
+    router.push('/home/admin/users')
+  }
+  const handleClickAdminCars = () => {
+    router.push('/home/admin/cars')
+  }
+  const handleClickAdminOrders = () => {
+    router.push('/home/admin/orders')
+  }
+
+
+
   const handleClickSignOut = () => {
     Cookies.remove('token')
     localStorage.clear()
@@ -26,6 +40,7 @@ const Navbar = () => {
   }
   return (
     <div className='bg-color-white'>
+      <NextNProgress color="#29D" startPosition={0.3} stopDelayMs={200} height={3} showOnShallow={true} />
       <nav className="flex justify-between items-center py-4 mx-64 ">
         <div className=''>
           <Image src={logo} alt='' className='w-20' />
@@ -35,17 +50,28 @@ const Navbar = () => {
             <button type='button' className='hover:text-color-green font-semibold' onClick={handleClickHome}>Home</button>
           </div>
           <div>
-            <button type='button' className='hover:text-color-green font-semibold' onClick={handleClickShop}>Shop</button>
+            <button type='button' className='hover:text-color-green font-semibold' onClick={handleClickShop}>Cars</button>
           </div>
           <div>
-            <button type='button' className='hover:text-color-green font-semibold' onClick={handleClickShop}>Blog</button>
+            <button type='button' className='hover:text-color-green font-semibold' onClick={handleClickOrder}>Order</button>
           </div>
           <div>
-            <button type='button' className='hover:text-color-green font-semibold' onClick={handleClickShop}>Pages</button>
+            <button type='button' className='hover:text-color-green font-semibold' onClick={handleClickShop}>
+            <Dropdown>
+              <DropdownTrigger>
+                  Admin Panel
+              </DropdownTrigger>
+              <DropdownMenu aria-label="Static Actions">
+                <DropdownItem onClick={handleClickAdminCars}>Cars</DropdownItem>
+                <DropdownItem onClick={handleClickAdminOrders}>Orders</DropdownItem>
+                <DropdownItem onClick={handleClickAdminUser}>User</DropdownItem>
+              </DropdownMenu>
+            </Dropdown>
+            </button>
           </div>
-          <div>
+          {/* <div>
             <button type='button' className='hover:text-color-green font-semibold' onClick={handleClickShop}>About Us</button>
-          </div>
+          </div> */}
         </div>
         <div className='flex gap-4 items-center'>
           <div className='bg-color-E2F4C5 p-2 rounded-full'>
@@ -69,7 +95,7 @@ const Navbar = () => {
           </div>
           </button>
           <div className='bg-color-EEF5FF p-2 rounded-full'>
-            <button type='button' onClick={handleClickCart}>
+            <button type='button'>
               <ShoppingCartSimple size={25} className='opacity-70' />
             </button>
           </div>

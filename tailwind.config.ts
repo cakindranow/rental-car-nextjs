@@ -34,7 +34,8 @@ const config: Config = {
         'orange' : '#E9A00D',
         'red' : '#E62929',
         'red-bg-alert' : '#FFF2F2',
-        'blue-dark' : '#2b2e6b'
+        'blue-dark' : '#2b2e6b',
+        'green-black' : '#253a2c'
       },
       backgroundImage: {
         'hero-pattern':

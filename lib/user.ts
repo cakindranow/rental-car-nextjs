@@ -1,4 +1,5 @@
 import { LoginRequestInterface, UserCreateOrUpdateInterface } from "@/interface/user"
+import axios from "axios"
 
 export const postSignup = async(user : UserCreateOrUpdateInterface) => {
     try {
@@ -31,5 +32,20 @@ export const postLogin = async(user : LoginRequestInterface) => {
         return signupResponse
     } catch (error) {
         console.log(error)
+    }
+}
+
+export const getAllUser = async ( token : string | undefined) => {
+    try {
+        const response = await axios({
+            method: 'get',
+            url: `${process.env.NEXT_PUBLIC_API_BASE_URL}/users/all`,
+            headers : {
+                Authorization : `Bearer ${token}`
+            },
+        });
+        return response.data
+    } catch (error) {
+        // console.log(error)
     }
 }

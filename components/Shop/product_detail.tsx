@@ -13,6 +13,9 @@ import { useRouter } from 'next/navigation'
 import { CarResponseInterface } from '@/interface/car'
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { differentDay } from '@/util/count_different_day'
+import { postOrderCar } from '@/lib/order'
+import dateFormat, { masks } from "dateformat";
 
 type carDetailProps = {
   car: CarResponseInterface
@@ -20,11 +23,32 @@ type carDetailProps = {
 }
 const CarDetailComponent = ({ car, token }: carDetailProps) => {
   const router = useRouter();
-  const handleClickOrderCar = () => {
-    router.push(`/home/cars/order/${car.id}`)
-  }
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
+  const [formData, setFormData] = useState({ cars_id: "", start_date: "", end_date: "", total_day : 0 });
+  const [error, setError] = useState("");
+  const handleClickOrderCar = async() => {
+    try {
+      const totalDay = differentDay(startDate, endDate)
+      if (startDate > endDate) {
+        setError("start date harus lebih awal daripada end date")
+        return
+      }
+      if (totalDay < 1 ) {
+        setError("hari harus lebih dari satu")
+        return
+      }
+      formData.cars_id = car.id
+      formData.start_date = dateFormat(startDate, "isoDate");
+      formData.end_date = dateFormat(endDate, "isoDate");
+      formData.total_day = totalDay
+      await postOrderCar(formData, token)
+      router.push(`/home/cars/order`)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
 
 return (
   <div className='mt-16'>
@@ -38,10 +62,18 @@ return (
             <p className='text-sm'> <span>Model :</span> <span className='text-color-green font-semibold'>{car.model}</span></p>
           </div>
         </div>
-        <hr className='mt-7 opacity-15' />
+        <hr className='mt-7 opacity-15'/>
         <div className='flex gap-2'>
           <Image className='ml-16 mt-5 rounded-xl' src={car.image_url} alt='' width='500' height='500' />
           <div className='ml-16 mt-5'>
+            {
+              error ? 
+              <div className="p-4 mb-4 text-sm text-red-800 rounded-lg bg-color-red-bg-alert text-color-red" role="alert">
+              <span className="font-medium">{error}</span>
+            </div>
+              :
+              <></>
+            }
             <p className='text-3xl font-semibold mt-5'>{ToRupiah(car.daily_rental_rate)} / Daily</p>
             <form className="max-w-sm mx-auto mt-10">
                 <div className="mb-5">
