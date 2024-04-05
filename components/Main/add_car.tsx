@@ -1,15 +1,12 @@
 'use client'
-import { ArrowRight, DotsNine, ListBullets, Plus } from '@phosphor-icons/react'
+
 import React, { useEffect, FormEvent, useState } from 'react'
-import { CardCarShop } from '../Card/card_product_shop'
-import { getListProductResponse } from '@/lib/product'
-import { getListCar } from '@/lib/car'
+import { getListCar, postCar } from '@/lib/car'
 import DatePicker from 'react-datepicker'
 import "react-datepicker/dist/react-datepicker.css";
-import dateFormat, { masks } from "dateformat";
-import { differentDay } from '@/util/count_different_day'
+
 import { useRouter } from 'next/navigation'
-import Cookies from 'js-cookie';
+
 
 
 type Props = {
@@ -21,10 +18,8 @@ const CarAddComponent = ({ token }: Props) => {
     const [cars, setCars] = useState({ brand: "", model: "", plat: "", daily_rental_rate: "", desc: "" });
     const inputFileRef = React.useRef<HTMLInputElement | null>(null);
 
-
-
-    const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
-        event.preventDefault();
+    const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+        e.preventDefault()
         /* If file is not selected, then show alert message */
         if (!inputFileRef.current?.files?.length) {
             alert('Please, select file you want to upload');
@@ -42,48 +37,40 @@ const CarAddComponent = ({ token }: Props) => {
         formData.append('daily_rental_rate', cars.daily_rental_rate)
         formData.append('desc', cars.desc)
 
-        const responseLogin = await postLogin(formData)
-        if (responseLogin.header.error == false) {
-            Cookies.set('token', responseLogin.data.token)
-            localStorage.setItem('user', JSON.stringify({ name: responseLogin.name, email: responseLogin.email }));
-            setTimeout(() => {
-                router.push('/home');
-            });
-        }
-        else {
-            // setError(responseLogin.header.message)
-        }
+        await postCar(formData, token)
+        router.push('/home/admin/cars');
+
     }
     return (
         <div className='flex justify-center'>
-            <div className='bg-color-white w-1/2 mt-10 p-10 rounded-2xl'>
+            <div className='bg-color-white w-1/2 mt-10 p-10 rounded-2xl pb-10'>
                 <p className='text-4xl flex justify-center font-bold mt-10'>Add Car</p>
-                <form className="max-w-lg mx-auto mt-10">
+                <form onSubmit={handleSubmit} className="max-w-lg mx-auto mt-10">
                     <div className="mb-5">
                         <label htmlFor="text" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Brand</label>
-                        <input type="text" id="email" className=" bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="name@flowbite.com" required />
+                        <input required onChange={(e) => setCars({ ...cars, brand: e.target.value })} type="text" id="email" className=" bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="name@flowbite.com" />
                     </div>
                     <div className="mb-5">
                         <label htmlFor="text" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Model</label>
-                        <input type="text" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required />
+                        <input required onChange={(e) => setCars({ ...cars, model: e.target.value })} type="text" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
                     </div>
                     <div className="mb-5">
                         <label htmlFor="text" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Plat</label>
-                        <input type="text" id="text" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required />
+                        <input required onChange={(e) => setCars({ ...cars, plat: e.target.value })} type="text" id="text" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
                     </div>
                     <div className="mb-5">
                         <label htmlFor="text" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Daily Rental Rate</label>
-                        <input type="text" id="text" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required />
+                        <input required onChange={(e) => setCars({ ...cars, daily_rental_rate: e.target.value })} type="text" id="text" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
                     </div>
                     <div className="mb-5">
                         <label htmlFor="message" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Description</label>
-                        <textarea className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required />
+                        <textarea required onChange={(e) => setCars({ ...cars, desc: e.target.value })} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
                     </div>
 
                     <div className="mb-5">
 
                         <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white" htmlFor="file_input">Upload file</label>
-                        <input type="file" className="block p-2 w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" id="file_input" type="file" />
+                        <input type="file" ref={inputFileRef} className="block p-2 w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" id="file_input"/>
 
                     </div>
 
