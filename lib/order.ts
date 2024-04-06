@@ -93,7 +93,7 @@ export const getRejectOrder = async (order_id : string,token : string | undefine
             validateStatus: () => true,
         });
         return response?.data
-    } catch (error) {
-        console.log(error)
+    } catch (error : any) {
+        return error?.response?.data
     }   
 }
