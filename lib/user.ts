@@ -20,22 +20,22 @@ export const postSignup = async(user : UserCreateOrUpdateInterface) => {
 
 export const postLogin = async(user : LoginRequestInterface) => {
     try {
-        const response = await axios({
-            method: 'post',
-            url: `${process.env.NEXT_PUBLIC_API_BASE_URL}/auth/login`,
-            data : user
-        });
+        // const response = await axios({
+        //     method: 'post',
+        //     url: `${process.env.NEXT_PUBLIC_API_BASE_URL}/auth/login`,
+        //     data : user
+        // });
 
-        // const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/auth/login`,  { 
-        //     cache: 'no-store',
-        //     method: "POST", // or 'PUT'
-        //     headers: {
-        //       "Content-Type": "application/json",
-        //     },
-        //     body: JSON.stringify(user), 
-        // })
-        // const signupResponse = await response.json()
-        return response.data
+        const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/auth/login`,  { 
+            cache: 'no-store',
+            method: "POST", // or 'PUT'
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(user), 
+        })
+        const signinResponse = await response.json()
+        return signinResponse
     } catch (error) {
         console.log(error)
     }
