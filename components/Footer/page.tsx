@@ -2,7 +2,6 @@
 import { ChatDots, Hamburger, Tag, Truck, Wallet } from "@phosphor-icons/react"
 
 const FooterComponent = () => {
-    console.log(localStorage.getItem("user"))
     return (
         <footer className="h-[490px] w-full bg-color-blue-dark mt-28 bottom-0">
             <div className="flex flex-col">

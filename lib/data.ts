@@ -10,7 +10,7 @@ export const getContacts = async () => {
 }
 
 export const getProfile = () => {
-   const user : UserInterface = {
+   const user  = {
     id : "11",
     name : "joko widodo",
     address : "jalan sukabumi"
@@ -21,7 +21,7 @@ export const getProfile = () => {
 
 
 export const getProducts = () => {
-    const products : ProductInterface[] = [
+    const products = [
         {
             id : "1",
             productName : "macbook 13",
