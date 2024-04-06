@@ -16,6 +16,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import { differentDay } from '@/util/count_different_day'
 import { postOrderCar } from '@/lib/order'
 import dateFormat, { masks } from "dateformat";
+import CarHomeImage from '@/public/assets/images/car-home.png'
 
 type carDetailProps = {
   car: CarResponseInterface
@@ -23,6 +24,7 @@ type carDetailProps = {
 }
 const CarDetailComponent = ({ car, token }: carDetailProps) => {
   const router = useRouter();
+  const test = true
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
   const [formData, setFormData] = useState({ cars_id: "", start_date: "", end_date: "", total_day : 0 });
@@ -31,18 +33,23 @@ const CarDetailComponent = ({ car, token }: carDetailProps) => {
     try {
       const totalDay = differentDay(startDate, endDate)
       if (startDate > endDate) {
-        setError("start date harus lebih awal daripada end date")
+        setError("start date harus lebih awal dari end date")
         return
       }
       if (totalDay < 1 ) {
-        setError("hari harus lebih dari satu")
+        setError("durasi hari sewa minimal satu hari")
         return
       }
       formData.cars_id = car.id
       formData.start_date = dateFormat(startDate, "isoDate");
       formData.end_date = dateFormat(endDate, "isoDate");
       formData.total_day = totalDay
-      await postOrderCar(formData, token)
+      const response = await postOrderCar(formData, token)
+      console.log(response.header)
+      if(response.header.error) {
+        setError(response.header.message)
+        return
+      }
       router.push(`/home/cars/order`)
     } catch (error) {
       console.log(error)
@@ -85,7 +92,7 @@ return (
                   <DatePicker className='shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light' selected={endDate} onChange={(date:any) => setEndDate(date)} />
                 </div>
                 <div className='mt-10 flex gap-2 items-center'>
-              <button type='button' onClick={handleClickOrderCar} className='bg-color-green-brown h-10 w-48 rounded-lg text-color-white font-semibold'>Order</button>
+              <button type='button' onClick={handleClickOrderCar} className='bg-color-blue-dark hover:bg-opacity-80 h-10 w-48 rounded-lg text-color-white font-semibold'>Order</button>
             </div>
               </form>
           
@@ -98,7 +105,7 @@ return (
         <div className='flex justify-center'>
           <p className='mt-8 font-semibold'>PRODUCT DESCRIPTION</p>
         </div>
-        <p className='mx-28 mt-8 font-light'>{car.desc}</p>
+        <p className='mx-28 mt-8 font-light mb-16'>{car.desc}</p>
       </div>
 
       <div className=' col-span-2 rounded-xl'>
@@ -108,7 +115,7 @@ return (
             <p className='mt-14 ml-10 text-color-yellow font-semibold'>HOT DEALS</p>
             <p className='mt-2 ml-10 text-xl font-semibold text-color-white'>WEEKEND PROMO</p>
             <p className='mt-2 ml-10 text-lg font-light text-color-white'>Everything you need</p>
-            <Image src={WeekendPromoImage} alt='' width='800' height='800' className='mt-8' />
+            <Image src={CarHomeImage} alt='' width='800' height='800' className='mt-8' />
           </div>
         </div>
       </div>

@@ -13,7 +13,9 @@ const LoginForm = () => {
     const [isLoading, setIsLoading] = useState(false);
 
     const router = useRouter();
-
+    const handleRegistration = () => {
+        router.push("/auth/signup")
+    }
     const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
 
         event.preventDefault();
@@ -22,7 +24,7 @@ const LoginForm = () => {
         const responseLogin = await postLogin(formData)
         if (responseLogin.header.error == false) {
             Cookies.set('token',responseLogin.data.token)
-            localStorage.setItem('user', JSON.stringify({name : responseLogin.name, email : responseLogin.email}));
+            Cookies.set('is_admin', responseLogin.data.is_admin)
             setTimeout(() => {
                 router.push('/home');
             });
@@ -76,22 +78,23 @@ const LoginForm = () => {
 
                         <div className='h-[100px] my-3 w-[300px] '>
                             <div className=''>
-                                <input required onChange={(e) => setFormData({ ...formData, email: e.target.value })} className="appearance-none border rounded w-full py-1.5 px-3 text-color-primary y leading-tight focus:outline-none font-light " id="fullname" type="text" />
+                                <input required onChange={(e) => setFormData({ ...formData, email: e.target.value })} className="appearance-none border rounded w-full py-1.5 px-3 text-color-blue-dark y leading-tight focus:outline-none font-light " id="fullname" type="text" />
                             </div>
 
                             <div className='mt-4'>
-                                <input required onChange={(e) => setFormData({ ...formData, password: e.target.value })} className="appearance-none border border-red-500 rounded w-full py-1.5 px-3 text-color-primary mb-3 leading-tight focus:outline-none focus:shadow-outline" id="password" type="password" />
+                                <input required onChange={(e) => setFormData({ ...formData, password: e.target.value })} className="appearance-none border border-red-500 rounded w-full py-1.5 px-3 text-color-blue-dark mb-3 leading-tight focus:outline-none focus:shadow-outline" id="password" type="password" />
                             </div>
                         </div>
                     </div>
 
-                    <a href="#" className='font-light ml-[70px]'>Forgot your password ?</a>
                     <div className='flex ml-[15%]'>
-                        <button type="submit" className='w-[320px] hover:opacity-80 mt-2 flex flex-row items-center gap-2 text-color-white font-light justify-center bg-color-primary h-10 rounded'>
+                        <button type="submit" className='w-[320px] hover:opacity-80 mt-2 flex flex-row items-center gap-2 text-color-white font-light justify-center bg-color-blue-dark h-10 rounded'>
                             Log In
                             <ArrowRight size={19} className='mt-0.5' />
                         </button>
                     </div>
+                    <button type='button' onClick={handleRegistration}  className='font-light mt-2'>Don't have an account ?</button>
+
                 </div>
             </form>
         </div>

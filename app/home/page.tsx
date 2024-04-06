@@ -8,9 +8,10 @@ import { redirect } from 'next/navigation'
 
 const Dashboard = () => {
   if(cookies().has('token')) {
+    const isAdmin = cookies().get('is_admin')?.value
     return (
       <div className='bg-color-secondary'>
-        <Navbar/>
+        <Navbar is_admin={isAdmin}/>
         <HomeComponent/>
         <FooterComponent/>
       </div>

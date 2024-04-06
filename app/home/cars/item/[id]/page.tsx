@@ -14,11 +14,11 @@ const Page = async ({ params }: ProductDetailProps) => {
   const {id} = params
   const token = cookies().get('token')?.value
   const car : CarResponseInterface = await getCarById(id, token)
-
+  const isAdmin = cookies().get('is_admin')?.value
   if (car) {
     return (
       <div className='flex flex-col h-full bg-color-gray'>
-            <Navbar/>
+            <Navbar is_admin={isAdmin}/>
             <CarDetailComponent car={car} token={token}/>
             <FooterComponent/>
         </div>

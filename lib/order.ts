@@ -41,11 +41,12 @@ export const postOrderCar = async (order : CreateOrderInterface, token : string 
             headers : {
                 Authorization : `Bearer ${token}`
             },
-            data : order
+            data : order,
+            validateStatus: () => false,
         });
         return product.data.data
-    } catch (error) {
-        // console.log(error)
+    } catch (error : any) {
+            return error?.response?.data
     }
 }
 

@@ -30,7 +30,7 @@ const ListCarComponent = ({ token }: Props) => {
             return
         }
         if (totalDay < 1) {
-            setError("hari harus lebih dari satu")
+            setError("durasi sewa minimal satu hari")
             return
         }
         const response = await getListCar(token, name, dateFormat(startDate, 'isoDate'), dateFormat(endDate, 'isoDate'))
@@ -71,7 +71,7 @@ const ListCarComponent = ({ token }: Props) => {
                             <DatePicker className='shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light' selected={endDate} onChange={(date: Date) => setEndDate(date)} />
                         </div>
                         <div className='mt-10 flex gap-2 items-center'>
-                            <button type='submit' className='bg-color-green hover:bg-opacity-80 h-10 w-48 rounded-lg text-color-white font-semibold'>Filter</button>
+                            <button type='submit' className='bg-color-blue-dark hover:bg-opacity-80 h-10 w-48 rounded-lg text-color-white font-semibold'>Filter</button>
                         </div>
                     </form>
                 </div>

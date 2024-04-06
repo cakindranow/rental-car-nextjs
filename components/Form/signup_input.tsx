@@ -6,12 +6,14 @@ import { postSignup } from '@/lib/user'
 import { Progress } from '@nextui-org/react'
 
 const SignUpForm = () => {
-    const [formData, setFormData] = useState({ email: "", password: "", name: "" });
+    const [formData, setFormData] = useState({ name: "", email: "",password: "", phone: "", address : "", sim:"" });
     const [error, setError] = useState("");
     const [isLoading, setIsLoading] = useState(false);
 
     const router = useRouter();
-
+    const handleLogin = () => {
+        router.push("/auth/login")
+    }
     const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         setIsLoading(true);
@@ -60,7 +62,7 @@ const SignUpForm = () => {
                         <div className='flex-col h-[40px] my-4'>
                             <div className='flex justify-end'>
                                 <label className="font-light text" htmlFor="fullname">
-                                    Full Name
+                                    Name
                                 </label>
                             </div>
                             <div className='flex justify-end mt-6'>
@@ -73,30 +75,55 @@ const SignUpForm = () => {
                                     Password
                                 </label>
                             </div>
+                            <div className='flex justify-end my-7'>
+                                <label className="font-light text" htmlFor="phone">
+                                    Phone
+                                </label>
+                            </div>
+                            <div className='flex justify-end my-7'>
+                                <label className="font-light text" htmlFor="address">
+                                    Address
+                                </label>
+                            </div>
+                            <div className='flex justify-end my-7'>
+                                <label className="font-light text" htmlFor="sim">
+                                    SIM
+                                </label>
+                            </div>
                         </div>
 
-                        <div className='h-[120px] my-3 w-[300px] '>
+                        <div className='h-[250px] my-3 w-[300px] '>
                             <div className=''>
-                                <input required onChange={(e) => setFormData({ ...formData, name: e.target.value })} className="appearance-none border rounded w-full py-1.5 px-3 text-color-primary y leading-tight focus:outline-none focus:shadow-outline" id="fullname" type="text" />
+                                <input required onChange={(e) => setFormData({ ...formData, name: e.target.value })} className="appearance-none border rounded w-full py-1.5 px-3 text-color-blue-dark y leading-tight focus:outline-none focus:shadow-outline" id="fullname" type="text" />
                             </div>
                             <div className='mt-4'>
-                                <input required onChange={(e) => setFormData({ ...formData, email: e.target.value })} className="appearance-none border rounded w-full py-1.5 px-3 text-color-primary y leading-tight focus:outline-none focus:shadow-outline" id="email" type="text" />
+                                <input required onChange={(e) => setFormData({ ...formData, email: e.target.value })} className="appearance-none border rounded w-full py-1.5 px-3 text-color-blue-dark y leading-tight focus:outline-none focus:shadow-outline" id="email" type="text" />
                             </div>
                             <div className='mt-4'>
-                                <input required onChange={(e) => setFormData({ ...formData, password: e.target.value })} className="appearance-none border border-red-500 rounded w-full py-1.5 px-3 text-color-primary mb-3 leading-tight focus:outline-none focus:shadow-outline" id="password" type="password" />
+                                <input required onChange={(e) => setFormData({ ...formData, password: e.target.value })} className="appearance-none border border-red-500 rounded w-full py-1.5 px-3 text-color-blue-dark mb-3 leading-tight focus:outline-none focus:shadow-outline" id="password" type="password" />
+                            </div>
+                            <div className='mt-2'>
+                                <input required onChange={(e) => setFormData({ ...formData, phone: e.target.value })} className="appearance-none border border-red-500 rounded w-full py-1.5 px-3 text-color-blue-dark mb-3 leading-tight focus:outline-none focus:shadow-outline" id="phone" type="text" />
+                            </div>
+                            <div className='mt-1'>
+                                <input required onChange={(e) => setFormData({ ...formData, address: e.target.value })} className="appearance-none border border-red-500 rounded w-full py-1.5 px-3 text-color-blue-dark mb-3 leading-tight focus:outline-none focus:shadow-outline" id="address" type="text" />
+                            </div>
+                            <div className='mt-2'>
+                                <input required onChange={(e) => setFormData({ ...formData, sim: e.target.value })} className="appearance-none border border-red-500 rounded w-full py-1.5 px-3 text-color-blue-dark mb-3 leading-tight focus:outline-none focus:shadow-outline" id="sim" type="text" />
                             </div>
                         </div>
                     </div>
 
                     {/* <a href="#" className='font-light ml-[70px]'>Forgot your password ?</a> */}
                     <div className='flex ml-[15%]'>
-                        <button type='submit' className='w-[330px] mt-2 flex flex-row items-center gap-2 text-color-white font-light justify-center bg-color-primary hover:opacity-80 h-10 rounded'>
+                        <button type='submit' className='w-[330px] mt-10 flex flex-row items-center gap-2 text-color-white font-light justify-center bg-color-blue-dark hover:opacity-80 h-10 rounded'>
                             Submit
                             <ArrowRight size={19} className='mt-0.5' />
                         </button>
                     </div>
-
+                    <button type='button' onClick={handleLogin}  className='font-light mt-2'>Already have an account ?</button>
                 </div>
+               
 
             </form>
         </div>

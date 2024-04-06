@@ -4,116 +4,72 @@ import GroceryImage from '@/public/assets/images/grocery.png'
 import Image from 'next/image'
 import StrowberryImage from '@/public/assets/images/strowberry.jpg'
 import vegetableImage from '@/public/assets/images/vegetable.png'
-
+import CarHomeImage from '@/public/assets/images/car-home.png'
 import { CardProduct } from '../Card/card_product_home'
-
-const listProduct = [
-    {
-        id: 1,
-        name : 'Indomie Mac and Cheese',
-        imageURL : 'https://img.freepik.com/premium-photo/traditional-italian-pasta-with-tomato-sauce-basil-cheese-black-background-top-down-view-with-copy-space_221774-9149.jpg?w=1380',
-        price : 234,
-        desc :  'Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum veritatis'
-    },
-    {
-        id : 2,
-        name : 'Roti Bakar',
-        imageURL : 'https://img.freepik.com/free-photo/bread-wooden-tray-red-white-cloth_1150-23896.jpg?t=st=1711077771~exp=1711081371~hmac=164a634f6de80490e695eb3ff5a79756e0f75a4a8c40138747ec5946a0039fab&w=1380',
-        price : 234,
-        desc :  'Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum veritatis'
-    },
-    {
-        id : 3,
-        name : 'Ice Tea',
-        imageURL : 'https://img.freepik.com/premium-photo/red-cocktail-with-ice-mint_97245-841.jpg?w=1060',
-        price : 234,
-        desc :  'Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum veritatis'
-    },
-    {
-        id : 4,
-        name : 'Green Tea',
-        imageURL : 'https://img.freepik.com/free-photo/front-view-green-smoothie-glass-with-ingredients_23-2148526573.jpg?t=st=1711077967~exp=1711081567~hmac=a4c2a4bbd04af64e10dcbe6c711c350f0636f95f5e70df25af33994a4ff91a90&w=1380',
-        price : 234,
-        desc :  'Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum veritatis'
-    }
-]
+import { useRouter } from 'next/navigation'
 
 const HomeComponent = () => {
+    const router = useRouter();
+    const handleOrderNow = () => {
+        router.push('/home/cars')
+    }
     return (
         <div className='bg-color-secondary'>
-            <div className='mx-64 h-[30rem] mt-10 flex gap-5 bg-color-blue-dark rounded-3xl'>
+            <div className='mx-64 h-[30rem] mt-10 flex gap-5 rounded-3xl'>
                 <div className='w-1/2 ml-16'>
-                    <p className='text-xl font-bold text-color-white mt-20'>Top Seller in the week</p>
-                    <p className='text-5xl font-bold mt-4 text-color-white '>Kedai</p>
-                    <p className='text-5xl font-bold  text-color-white'>Truly's Store</p>
-                    <p className='font-light mt-4  text-color-white'>Jalan Minasa Upa Blok D 13 No 12, Kec. Rappocini, Kel. Gunung Sari, Ujung Pandang</p>
-                    <button className='mt-10 bg-color-green h-12 w-40 rounded-2xl text-color-white font-bold'>Shop Now</button>
+                    <p className='text-6xl font-bold  mt-20'>Sewa Mobil Online</p>
+                    <p className='text-6xl font-bold mt-4  '>Untuk Perjalanan Anda</p>
+                    <p className='font-light mt-4  '>Jalan Veteran Selatan Makassar, Bonto Lebang, Kec. Mamajang, Kota Makassar, Sulawesi Selatan 90135</p>
+                    <button type='button' onClick={handleOrderNow} className='mt-10 bg-color-blue-dark hover:bg-opacity-70 text-color-white h-12 w-40 rounded-2xl  font-bold'>Order Now</button>
                 </div>
                 <div className=' w-1/2'>
-                    <Image src={GroceryImage} alt='' className='h-[27rem] w-[27rem]' />
-                </div>
-            </div>
-            <div className='my-10'>
-                <p className='flex justify-center text-3xl mt-14 font-bold'>Weekly Food Offers</p>
-                <p className='flex justify-center text-sm mt-2'>Lorem ipsum dolor, sit amet consectetur adipisicing elit.</p>
-            </div>
-
-            <div className='mx-64 p-4'>
-                <div className='grid grid-cols-12 gap-4'>
-                   {listProduct.map((product, idx) => (
-                    <CardProduct name={product.name} imageURL={product.imageURL} desc={product.desc} price={product.price}/>
-                   ))}   
+                    <Image src={CarHomeImage} alt='' className='h-[35rem] w-[75rem]' />
                 </div>
             </div>
 
-            <div className='my-10 flex flex-row justify-between mx-64'>
-                <div className='bg-color-green h-[220px] w-[450px] flex justify-between rounded-xl'>
+            <div className='mt-32'>
+                <p className='flex justify-center text-3xl mt-28 font-bold'>Mengapa sewa mobil di RentalAja ?</p>
+            </div>
+
+            <div className='mt-20 flex flex-row justify-between mx-64'>
+                <div className='bg-color-blue-dark h-[220px] w-[450px] flex justify-between rounded-xl'>
                     <div className=' ml-5 mt-8'>
-                        <p className='text-sm font-bold text-color-yellow'>TOP OFFERS</p>
-                        <p className='text-2xl font-bold mt-2 text-color-white'>Eat Green </p>
-                        <p className='text-2xl font-bold text-color-white'>Best For Family</p>
-                        <p className='mt-8 text-color-white'>Free Shipping 05km</p>
+                        <p className='text-3xl font-bold mt-2 text-color-white'>Hemat waktu </p>
+                        <p className='mt-5 text-color-white'>Sewa mobil cukup di genggaman Anda, kapan saja dan di mana saja. Bandingkan pilihan mobil dari partner tepercaya kami dengan mudah dan temukan yang sesuai dengan kebutuhan Anda.</p>
                     </div>
-                    <div className=''>
-                        <Image src={vegetableImage} className='w-[240px] mt-[34px] rounded-br-xl' alt='' />
+                   
+                </div>
+                <div className='bg-color-blue-dark h-[220px] w-[450px] flex justify-between rounded-xl'>
+                    <div className=' ml-5 mt-8'>
+                        <p className='text-3xl mt-2 font-bold text-color-white'>Servis Berkualitas</p>
+
+                        <p className='mt-5 text-color-white'>Partner rental mobil Traveloka menyediakan servis berkualitas demi kenyamanan bepergian Anda.</p>
                     </div>
                 </div>
-                <div className='bg-color-orange h-[220px] w-[450px] flex justify-between rounded-xl'>
+                <div className='bg-color-blue-dark h-[220px] w-[450px] flex justify-between rounded-xl'>
                     <div className=' ml-5 mt-8'>
-                        <p className='text-sm font-bold text-color-white'>WEEKEND DEALS</p>
-                        <p className='text-2xl font-bold mt-2 text-color-white'>Fresh Food </p>
-                        <p className='text-2xl font-bold text-color-white'>Bestore Health</p>
-                        <p className='mt-8 text-color-white'>Top Quality Products</p>
-                    </div>
-                    <div className=''>
-                        <Image src={vegetableImage} className='w-[240px] mt-[34px] rounded-br-xl' alt='' />
-                    </div>
-                </div>
-                <div className='bg-color-red h-[220px] w-[450px] flex justify-between rounded-xl'>
-                    <div className=' ml-5 mt-8'>
-                        <p className='text-sm font-bold text-color-white'>TOP SELLERS</p>
-                        <p className='text-2xl font-bold mt-2 text-color-white'>Healthy</p>
-                        <p className='text-2xl font-bold text-color-white'>Fresh Free Bread</p>
-                        <p className='mt-8 text-color-white'>Limited Time : Online Only!</p>
-                    </div>
-                    <div className=''>
-                        <Image src={vegetableImage} className='w-[240px] mt-[34px] rounded-br-xl' alt='' />
+                        <p className='text-3xl mt-2 font-bold text-color-white'>Rating Pengguna Asli</p>
+                        <p className='mt-5 text-color-white'>Ucapkan selamat tinggal pada keputusan yang tidak tepat. Rating dari user lain akan membantu Anda untuk menemukan pilihan rental mobil yang paling tepat.</p>
                     </div>
                 </div>
             </div>
 
-            <div className='my-10'>
-                <p className='flex justify-center text-3xl mt-14 font-bold'>Weekly Food Offers</p>
-                <p className='flex justify-center text-sm mt-2'>Lorem ipsum dolor, sit amet consectetur adipisicing elit.</p>
+            <div className='mt-36 bg-color-blue-dark mx-80 px-3 pb-10 pt-1 rounded-xl'>
+                <p className='flex justify-center text-color-white text-3xl mt-14 font-bold'>Rental Mobil Lepas Kunci</p>
+                <p className='flex justify-center text-color-white text-medium mt-2 font-light'>Rental mobil lepas kunci adalah solusi praktis dan fleksibel bagi yang ingin menikmati kebebasan dalam perjalanan. Tanpa adanya supir, kamu bisa mengatur jadwal dan rute perjalanan sendiri. Ini cocok untuk kamu yang ingin menjelajahi berbagai destinasi di banyak tempat. Buat kamu yang dalam perjalanan bisnis pun, ini akan sangat membantu. Sewa mobil lepas kunci menawarkan fleksibilitas waktu, jadi kamu bisa menyewa mobil sesuai kebutuhan, mulai dari beberapa jam hingga berminggu-minggu</p>
             </div>
 
-            <div className='mx-64 p-4'>
-                <div className='grid grid-cols-12 gap-4'>
-                   {listProduct.map((product, idx) => (
-                    <CardProduct key={product.id} name={product.name} desc={product.desc} imageURL={product.imageURL} price={product.price}/>
-                   ))}   
-                </div>
+            <div className='mt-20 bg-color-blue-dark mx-80 px-3 pb-10 pt-1 rounded-xl'>
+                <p className='flex justify-center text-color-white text-3xl mt-14 font-bold'>Rental Mobil dengan Sopir</p>
+                <p className='flex justify-center text-color-white text-medium mt-2 font-light'>Ingin liburanmu tambah praktis dan nyaman? Rental mobil dengan sopir jawabannya! Kamu bisa menikmati perjalanan tanpa harus repot jadi sopir sendiri. Sopir yang ahli dan berpengalaman bakal membawa kamu ke destinasi dengan aman dan lancar. Nggak perlu khawatir nyasar atau bingung jalur, sopirnya sudah paham betul. Ini cocok banget buat liburan santai bersama keluarga atau teman-teman, atau bahkan buat perjalanan bisnis yang lebih efisien. Jadi, tinggal duduk manis dan nikmatin perjalanan tanpa ribet deh! Tertarik? Yuk, segera sewa mobil dengan sopir di RentalAja. Dapatkan juga harga rental mobil murah hanya di RentalAja!</p>
             </div>
+
+            
+            <div className='mt-20 bg-color-blue-dark mx-80 px-3 pb-10 pt-1 rounded-xl'>
+                <p className='flex justify-center text-color-white text-3xl mt-14 font-bold'>Rental Mobil Murah Promo </p>
+                <p className='flex justify-center text-color-white text-medium mt-2 font-light '>Jika kamu ingin mengeksplorasi kota tujuan tanpa batas tapi bingung mau naik transportasi apa, sewa mobil bisa menjadi opsi terbaik. Selain memberikan kesan aman dan privat, sewa mobil juga dinilai menghemat bujet. Nah, buat kamu yang lagi cari jasa rental mobil murah, jangan ragu untuk sewa mobil di RentalAja </p>
+            </div>
+
         </div>
     )
 }

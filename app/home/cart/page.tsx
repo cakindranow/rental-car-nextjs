@@ -8,9 +8,10 @@ import React from 'react'
 
 const Cart = () => {
     const token = cookies().get('token')?.value
+    const isAdmin = cookies().get('is_admin')?.value
     return (
         <div className='flex flex-col h-full bg-color-gray'>
-            <Navbar/>
+            <Navbar is_admin={isAdmin}/>
             <CartComponent token={token}/>
             <FooterComponent/>
         </div>

@@ -20,7 +20,7 @@ const Dashboard = () => {
               Sign <span className='font-light'>Up</span>
             </h1>
             <h1 className='text-lg font-light '>
-            <span className='flex justify-center'>task management monday</span>
+            <span className='flex justify-center'>Rental Cars Registration Account</span>
             </h1>
             <SignUpForm/>
           </div>

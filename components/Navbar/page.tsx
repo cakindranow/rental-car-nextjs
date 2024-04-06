@@ -9,7 +9,11 @@ import Cookies from 'js-cookie';
 import logo from '@/public/assets/logo.png'
 import NextNProgress from 'nextjs-progressbar';
 
-const Navbar = () => {
+interface Props {
+  is_admin: string | undefined
+}
+
+const Navbar = ({ is_admin }: Props) => {
   const router = useRouter()
   const handleClickHome = () => {
     router.push('/home')
@@ -43,7 +47,7 @@ const Navbar = () => {
       <NextNProgress color="#29D" startPosition={0.3} stopDelayMs={200} height={3} showOnShallow={true} />
       <nav className="flex justify-between items-center py-4 mx-64 ">
         <div className=''>
-          <Image src={logo} alt='' className='w-20' />
+          <p className='font-bold text-color'>Rental Aja</p>
         </div>
         <div className=' flex gap-20 items-center'>
           <div>
@@ -55,50 +59,51 @@ const Navbar = () => {
           <div>
             <button type='button' className='hover:text-color-green font-semibold' onClick={handleClickOrder}>Order</button>
           </div>
-          <div>
+          {
+            is_admin == "true" ?
+            <div>
             <button type='button' className='hover:text-color-green font-semibold' onClick={handleClickShop}>
-            <Dropdown>
-              <DropdownTrigger>
+              <Dropdown>
+                <DropdownTrigger>
                   Admin Panel
-              </DropdownTrigger>
-              <DropdownMenu aria-label="Static Actions">
-                <DropdownItem onClick={handleClickAdminCars}>Cars</DropdownItem>
-                <DropdownItem onClick={handleClickAdminOrders}>Orders</DropdownItem>
-                <DropdownItem onClick={handleClickAdminUser}>User</DropdownItem>
-              </DropdownMenu>
-            </Dropdown>
+                </DropdownTrigger>
+                <DropdownMenu aria-label="Static Actions">
+                  <DropdownItem onClick={handleClickAdminCars}>Cars</DropdownItem>
+                  <DropdownItem onClick={handleClickAdminOrders}>Orders</DropdownItem>
+                  <DropdownItem onClick={handleClickAdminUser}>User</DropdownItem>
+                </DropdownMenu>
+              </Dropdown>
             </button>
-          </div>
+          </div> : <></>
+          }
           {/* <div>
             <button type='button' className='hover:text-color-green font-semibold' onClick={handleClickShop}>About Us</button>
           </div> */}
         </div>
         <div className='flex gap-4 items-center'>
-          <div className='bg-color-E2F4C5 p-2 rounded-full'>
+          {/* <div className='bg-color-E2F4C5 p-2 rounded-full'>
             <MagnifyingGlass size={25} className='opacity-60' />
-          </div>
-          <button>
-          <div className='bg-color-DFF5FF p-2 rounded-full'>
-            <Dropdown>
-              <DropdownTrigger>
+          </div> */}
+          <button className='hover:opacity-70'>
+            <div className='bg-color-DFF5FF p-2 rounded-full'>
+              <Dropdown>
+                <DropdownTrigger>
                   <User size={25} className='opacity-60' />
-              </DropdownTrigger>
-              <DropdownMenu aria-label="Static Actions">
-                <DropdownItem key="new">New file</DropdownItem>
-                <DropdownItem key="copy">Copy link</DropdownItem>
-                <DropdownItem key="edit">Edit file</DropdownItem>
-                <DropdownItem onClick={handleClickSignOut} key="delete" className="text-danger" color="danger">
-                  Sign Out
-                </DropdownItem>
-              </DropdownMenu>
-            </Dropdown>
-          </div>
+                </DropdownTrigger>
+                <DropdownMenu aria-label="Static Actions">
+                  <DropdownItem key="new">Profle</DropdownItem>
+                  <DropdownItem onClick={handleClickSignOut} key="delete" className="text-danger" color="danger">
+                    Sign Out
+                  </DropdownItem>
+                </DropdownMenu>
+              </Dropdown>
+            </div>
           </button>
-          <div className='bg-color-EEF5FF p-2 rounded-full'>
+          {/* <div className='bg-color-EEF5FF p-2 rounded-full'>
             <button type='button'>
               <ShoppingCartSimple size={25} className='opacity-70' />
             </button>
-          </div>
+          </div> */}
         </div>
       </nav>
     </div>

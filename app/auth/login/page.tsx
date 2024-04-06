@@ -12,7 +12,7 @@ const Dashboard = () => {
               Log <span className='font-light'>In</span>
             </h1>
             <h1 className='text-lg font-light '>
-            <span className='flex justify-center'> agungindrawan's Team</span>
+            <span className='flex justify-center'>Rental Cars Login Account</span>
             </h1>
             <LoginForm/>
           </div>

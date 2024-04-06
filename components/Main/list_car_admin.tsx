@@ -70,7 +70,7 @@ const ListCarAdminComponent = ({ token }: Props) => {
                     <div className='w-[220px] ml-2'>
                         <p className='font-semibold cols-4'>Showing Cars</p>
                     </div>
-                    <button type='button' onClick={handleAddCar} className='px-10 py-2 rounded bg-color-primary text-color-white'>Add Car</button>
+                    <button type='button' onClick={handleAddCar} className='px-10 py-2 rounded bg-color-blue-dark text-color-white'>Add Car</button>
                 </div>
                 <div className='grid grid-cols-12 gap-7 w-[66rem] mt-10 '>
                     {data?.map((car, idx) => (
