@@ -34,3 +34,19 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+
+## Preview
+![image](https://github.com/indrawanagung/rental-car-nextjs/assets/80109631/4206e53d-0ee2-4af7-b589-a7914c57f11c)
+![image](https://github.com/indrawanagung/rental-car-nextjs/assets/80109631/2c0d0bb0-3d2f-496b-8e6f-73a32218bfb0)
+![image](https://github.com/indrawanagung/rental-car-nextjs/assets/80109631/457241c0-cd9f-4f80-bcbf-a01990bb0a31)
+![image](https://github.com/indrawanagung/rental-car-nextjs/assets/80109631/9ed21ba6-96cb-4b4d-b734-512a16d0a478)
+![image](https://github.com/indrawanagung/rental-car-nextjs/assets/80109631/ce3329df-919f-4a14-afe4-772d2ff93295)
+![image](https://github.com/indrawanagung/rental-car-nextjs/assets/80109631/fdc3fba1-54d0-4cff-8846-ff9ec6cf9d1d)
+![image](https://github.com/indrawanagung/rental-car-nextjs/assets/80109631/eed94dc4-0401-4dfc-ab2d-e64988aec78a)
+
+
+
+
+
+
+
